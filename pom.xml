@@ -141,7 +141,7 @@
   
   <modules>
       
-    <module>twitter-to-kaka-service</module>
+    <module>twitter-to-kafka-service</module>
       
   </modules>
 </project>

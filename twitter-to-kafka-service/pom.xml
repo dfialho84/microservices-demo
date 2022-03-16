@@ -7,7 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>twitter-to-kaka-service</artifactId>
+  <artifactId>twitter-to-kafka-service</artifactId>
   
   <dependencies>
     <dependency>

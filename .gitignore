@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# LOGS
+*/logs
+logs/
+
+# SECRETS
+**/twitter4j.properties
