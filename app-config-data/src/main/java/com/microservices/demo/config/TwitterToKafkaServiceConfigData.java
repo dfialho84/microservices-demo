@@ -1,4 +1,4 @@
-package com.microservices.demo.twitter.to.kafka.service.config;
+package com.microservices.demo.config;
 
 import java.util.List;
 
