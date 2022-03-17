@@ -10,17 +10,19 @@ import com.microservices.demo.twitter.to.kafka.service.runner.StreamRunner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
 import twitter4j.FilterQuery;
 import twitter4j.TwitterException;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 
+@Slf4j
 @Component
+@ConditionalOnProperty(name = "twitter-to-kafka-service.enable-mock-tweets", havingValue = "false")
 public class TwitterKafkaStreamRunner implements StreamRunner {
-
-    private static final Logger LOG = LoggerFactory.getLogger(TwitterKafkaStreamRunner.class);
 
     private final TwitterToKafkaServiceConfigData config;
     private final TwitterKafkaStatusListener twitterKafkaStatusListener;
@@ -37,13 +39,13 @@ public class TwitterKafkaStreamRunner implements StreamRunner {
         String[] keywords = config.getTwitterKeywords().toArray(new String[0]);
         FilterQuery filterQuery = new FilterQuery(keywords);
         twitterStream.filter(filterQuery);
-        LOG.info("Started filtering twitter stream for keywords {}", Arrays.toString(keywords));
+        log.info("Started filtering twitter stream for keywords {}", Arrays.toString(keywords));
     }
 
     @PreDestroy
     public void shutdown() {
         if(twitterStream != null) {
-            LOG.info("Closing twitter stream");
+            log.info("Closing twitter stream");
             twitterStream.shutdown();
         }
     }

@@ -13,4 +13,8 @@ import lombok.Data;
 public class TwitterToKafkaServiceConfigData {
     private List<String> twitterKeywords;
     private String welcomeMessage;
+    private Boolean enableMockTweets;
+    private Integer mockMinTweetLength;
+    private Integer mockMaxTweetLength;
+    private Long mockSleepMs;
 }
