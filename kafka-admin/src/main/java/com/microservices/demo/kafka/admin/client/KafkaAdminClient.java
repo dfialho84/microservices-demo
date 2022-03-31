@@ -48,7 +48,7 @@ public class KafkaAdminClient {
         List<NewTopic> kafkaTopics = topicNames.stream().map(topic -> new NewTopic(
                 topic.trim(), kafkaConfigData.getNumOfPartitions(), kafkaConfigData.getReplicationFactor()))
                 .collect(Collectors.toList());
-        return adminClient.createTopics(kafkaTopics);
+        return adminClient.createTopics(kafkaTopics);        
     }
 
     private Collection<TopicListing> doGetTopics(RetryContext retryContext)
@@ -59,7 +59,7 @@ public class KafkaAdminClient {
         if (topics != null) {
             topics.forEach(topic -> log.debug("Topic with name {}", topic.name()));
         }
-        return topics;
+        return topics;        
     }
 
     private Collection<TopicListing> getTopics() {
@@ -69,14 +69,14 @@ public class KafkaAdminClient {
         } catch (Throwable t) {
             throw new KafkaClientException("Reached max number of retry for creating kafka topic(s)!", t);
         }
-        return topics;
+        return topics;        
     }
 
     private boolean isTopicCreated(Collection<TopicListing> topics, String topicName) {
         if (topics == null) {
             return false;
         }
-        return topics.stream().anyMatch(topic -> topic.name().equals(topicName));
+        return topics.stream().anyMatch(topic -> topic.name().equals(topicName));        
     }
 
     private void checkMaxRetry(Integer retryCount, Integer maxRetry) {
@@ -118,7 +118,7 @@ public class KafkaAdminClient {
             throw new KafkaClientException("Reached max number of retry for creating kafka topic(s)!", t);
         }
         checkTopicsCreated();
-        return createTopicsResult;
+        return createTopicsResult;        
     }
 
     private HttpStatus getSchemaRegistryStatus() {
@@ -131,8 +131,7 @@ public class KafkaAdminClient {
             .block();
         } catch(Exception e) {
             return HttpStatus.SERVICE_UNAVAILABLE;
-        }
-        
+        }        
     }
 
     public void checkSchemaRegistry() {
