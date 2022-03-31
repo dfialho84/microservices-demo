@@ -93,7 +93,7 @@ public class KafkaAdminClient {
         }
     }
 
-    public void checkTopicsCreated() {
+    private void checkTopicsCreated() {
         Collection<TopicListing> topics = getTopics();
         int retryCount = 1;
         Integer maxRetry = retryConfigData.getMaxAttempts();
@@ -110,7 +110,7 @@ public class KafkaAdminClient {
         }
     }
 
-    public void createTopics() {
+    public CreateTopicsResult createTopics() {
         CreateTopicsResult createTopicsResult;
         try {
             createTopicsResult = retryTemplate.execute(this::doCreateTopics);
@@ -118,6 +118,7 @@ public class KafkaAdminClient {
             throw new KafkaClientException("Reached max number of retry for creating kafka topic(s)!", t);
         }
         checkTopicsCreated();
+        return createTopicsResult;
     }
 
     private HttpStatus getSchemaRegistryStatus() {
